@@ -12,7 +12,7 @@ public class BookBehaviour : MonoBehaviour
     [SerializeField] private float rotationSpeed = 1f;
     [SerializeField] private Transform cameraRig;
 
-    public bool isBookOpen = false;
+    private bool isBookOpen = false;
     public void OpenBook()
     {
         isBookOpen = true;
@@ -34,7 +34,7 @@ public class BookBehaviour : MonoBehaviour
     private void SetBookRotation()
     {
         float cameraYRotation = cameraRig.rotation.eulerAngles.y;
-        StartCoroutine(LerpRotation(Quaternion.Euler(isBookOpen ? 180 : 0, cameraYRotation, isBookOpen ? 270 : 0))); // Modify this line
+        StartCoroutine(LerpRotation(Quaternion.Euler(180, cameraYRotation - 90, 270))); // Modify this line
     }
 
     private void TriggerBookAnimation(string trigger)
