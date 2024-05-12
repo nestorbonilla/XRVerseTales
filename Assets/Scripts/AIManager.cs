@@ -19,7 +19,6 @@ public class AIManager : MonoBehaviour
     [SerializeField] private Material _backgroundMaterial;
     private Dictionary<string, byte[]> _imageByPage = new Dictionary<string, byte[]>();
     
-    
     private string _serverUrl = "http://127.0.0.1:5000/";
     private string _serverActionPrompt = "generate_image";
     private bool _isGeneratingImage = false;

@@ -11,19 +11,17 @@ using VersOne.Epub;
 public class BookManager : MonoBehaviour
 {
     [SerializeField] public AIManager aIManager;
-    public string epubFileName = "principito.epub"; // The name of the EPUB file
-    private string epubFilePath; // The full path to the EPUB file
-    private EpubBook book; // The EPUB book object
-    private List<string> pages; // The list of pages in the book
-    private int currentPageIndex = 0; // The current page index
+    private string _epubFileName = "the-time-machine.epub";
+    private string epubFilePath;
+    private EpubBook book;
+    private List<string> pages;
+    private int currentPageIndex = 0;
 
-    public TextMeshPro textMeshPro; // The TextMeshPro component
-
-    // Start is called before the first frame update
+    public TextMeshPro textMeshPro;
+    
     void Start()
     {
-        // Get the full path of the EPUB file within the Assets folder
-        epubFilePath = Path.Combine(Application.dataPath, "Books", epubFileName);
+        epubFilePath = Path.Combine(Application.dataPath, "Books", _epubFileName);
 
         if (File.Exists(epubFilePath))
         {
@@ -31,7 +29,7 @@ public class BookManager : MonoBehaviour
             // Debug.Log("Title: " + book.Title);
             // Debug.Log("Author: " + book.Author);
             LoadPages();
-            RenderPage(5); // Render the first page
+            // RenderPage(5);
         }
         else
         {
@@ -41,20 +39,49 @@ public class BookManager : MonoBehaviour
 
     private EpubBook ReadEpubBook(string filePath)
     {
-        return EpubReader.ReadBook(filePath); // Read the EPUB book from the file
+        return EpubReader.ReadBook(filePath);
     }
 
     private void LoadPages()
     {
-        pages = new List<string>();
         foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
         {
-            if (!string.IsNullOrEmpty(textContentFile.Content))
+            PrintTextContentFile(textContentFile);
+        }
+        
+        // pages = new List<string>();
+        // foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
+        // {
+        //     if (!string.IsNullOrEmpty(textContentFile.Content))
+        //     {
+        //         string[] chapterPages = DivideIntoPages(textContentFile.Content);
+        //         pages.AddRange(chapterPages);
+        //     }
+        // }
+    }
+    
+    private static void PrintTextContentFile(EpubLocalTextContentFile textContentFile)
+    {
+        HtmlDocument htmlDocument = new();
+        htmlDocument.LoadHtml(textContentFile.Content);
+        int sectionCount = htmlDocument.DocumentNode.SelectNodes("//text()").Count;
+        StringBuilder sb = new();
+        for (int x = 0; x < sectionCount; x++)
+        {
+            HtmlNode node = htmlDocument.DocumentNode.SelectNodes("//text()")[x];
+            if (x>2)
             {
-                string[] chapterPages = DivideIntoPages(textContentFile.Content);
-                pages.AddRange(chapterPages); // Add the pages to the list
+                sb.AppendLine(node.InnerText.Trim());
+                string contentText = sb.ToString();
+                Debug.Log("Content of file " + contentText);
+                Debug.Log("______________________________");
             }
         }
+        // foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()"))
+        // {
+        //     sb.AppendLine(node.InnerText.Trim());
+        // }
+        
     }
 
     private string[] DivideIntoPages(string htmlContent)
@@ -89,7 +116,7 @@ public class BookManager : MonoBehaviour
             Debug.Log(visibleText);
             JSONObject requestData = new JSONObject();
             requestData.Add("text", visibleText);
-            string name = epubFileName + "_" + pageNumber.ToString();
+            string name = _epubFileName + "_" + pageNumber.ToString();
             aIManager.PaintBackgroundImage(requestData, name);
 
             // Update the text in TextMeshPro
