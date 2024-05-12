@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,28 +13,30 @@ public class BookManager : MonoBehaviour
 {
     [SerializeField] public AIManager aIManager;
     private string _epubFileName = "the-time-machine.epub";
-    private string epubFilePath;
-    private EpubBook book;
-    private List<string> pages;
-    private int currentPageIndex = 0;
+    private string _epubFilePath;
+    private EpubBook _book;
+    private List<string> _pages;
+    private int _currentPageIndex = 0;
+    private StringBuilder _sb;
+    private bool _introductionFound = false;
+    private int _introductionIndex = -1;
 
     public TextMeshPro textMeshPro;
     
     void Start()
     {
-        epubFilePath = Path.Combine(Application.dataPath, "Books", _epubFileName);
+        _epubFilePath = Path.Combine(Application.dataPath, "Books", _epubFileName);
 
-        if (File.Exists(epubFilePath))
+        if (File.Exists(_epubFilePath))
         {
-            book = ReadEpubBook(epubFilePath);
-            // Debug.Log("Title: " + book.Title);
-            // Debug.Log("Author: " + book.Author);
+            _book = ReadEpubBook(_epubFilePath);
+            Debug.Log("BM: Title: " + _book.Title);
             LoadPages();
-            // RenderPage(5);
+            RenderChapter(1);
         }
         else
         {
-            Debug.LogError("The EPUB file was not found at the specified path: " + epubFilePath);
+            Debug.LogError("BM: EPUB file not found at: " + _epubFilePath);
         }
     }
 
@@ -44,97 +47,85 @@ public class BookManager : MonoBehaviour
 
     private void LoadPages()
     {
-        foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
+        bool startRendering = false;
+
+        _pages = new List<string>();
+        foreach (EpubLocalTextContentFile textContentFile in _book.ReadingOrder)
         {
-            PrintTextContentFile(textContentFile);
-        }
-        
-        // pages = new List<string>();
-        // foreach (EpubLocalTextContentFile textContentFile in book.ReadingOrder)
-        // {
-        //     if (!string.IsNullOrEmpty(textContentFile.Content))
-        //     {
-        //         string[] chapterPages = DivideIntoPages(textContentFile.Content);
-        //         pages.AddRange(chapterPages);
-        //     }
-        // }
-    }
-    
-    private static void PrintTextContentFile(EpubLocalTextContentFile textContentFile)
-    {
-        HtmlDocument htmlDocument = new();
-        htmlDocument.LoadHtml(textContentFile.Content);
-        int sectionCount = htmlDocument.DocumentNode.SelectNodes("//text()").Count;
-        StringBuilder sb = new();
-        for (int x = 0; x < sectionCount; x++)
-        {
-            HtmlNode node = htmlDocument.DocumentNode.SelectNodes("//text()")[x];
-            if (x>2)
+            if (!string.IsNullOrEmpty(textContentFile.Content))
             {
-                sb.AppendLine(node.InnerText.Trim());
-                string contentText = sb.ToString();
-                Debug.Log("Content of file " + contentText);
-                Debug.Log("______________________________");
+                string[] chapterPages = DivideIntoPages(textContentFile.Content);
+                if (!startRendering)
+                {
+                    foreach (string page in chapterPages)
+                    {
+                        // Let's start from the first chapter
+                        if (page.Contains("I.\nIntroduction"))
+                        {
+                            startRendering = true;
+                            _pages.Add(page);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    _pages.AddRange(chapterPages);
+                }
             }
         }
-        // foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()"))
-        // {
-        //     sb.AppendLine(node.InnerText.Trim());
-        // }
-        
     }
-
     private string[] DivideIntoPages(string htmlContent)
     {
-        // Clean the HTML content
         string cleanedHtml = CleanHtml(htmlContent);
-
-        // Divide the content into pages based on paragraph tags
         string[] pageArray = cleanedHtml.Split(new string[] { "<p>", "</p>" }, System.StringSplitOptions.RemoveEmptyEntries);
-
         return pageArray;
     }
 
     private string CleanHtml(string htmlContent)
     {
-        // Create an HTML document
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(htmlContent);
 
-        // Get the visible text and return it
-        return doc.DocumentNode.InnerText.Trim();
+        string innerText = doc.DocumentNode.InnerText;
+
+        // On all inner texts, there's a repeating text that we need to remove
+        // We can use the index of the first occurrence of the text to remove it
+        if (_introductionIndex == -1)
+        {
+            _introductionIndex = innerText.IndexOf("I.\nIntroduction");
+        }
+
+        if (_introductionIndex != -1)
+        {
+            innerText = innerText.Substring(_introductionIndex);
+        }
+
+        return innerText.Trim();
     }
 
-    // Function to render a specific page based on the page number
-    public void RenderPage(int pageNumber)
+    public void RenderChapter(int pageNumber)
     {
         int pageIndex = pageNumber - 1;
-        if (pageIndex >= 0 && pageIndex < pages.Count)
+        if (pageIndex >= 0 && pageIndex < _pages.Count)
         {
-            Debug.Log("Rendering page " + pageNumber);
-            string visibleText = GetVisibleText(pages[pageIndex]);
-            Debug.Log(visibleText);
+            string visibleText = GetVisibleText(_pages[pageIndex]);
             JSONObject requestData = new JSONObject();
-            requestData.Add("text", visibleText);
+            requestData.Add("BM: text", visibleText);
             string name = _epubFileName + "_" + pageNumber.ToString();
             aIManager.PaintBackgroundImage(requestData, name);
-
-            // Update the text in TextMeshPro
             textMeshPro.text = visibleText;
         }
         else
         {
-            Debug.LogError("Page index out of range");
+            Debug.LogError("BM: Page index out of range");
         }
     }
 
     private string GetVisibleText(string htmlContent)
     {
-        // Create an HTML document
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(htmlContent);
-
-        // Get the visible text and concatenate it
         StringBuilder sb = new StringBuilder();
         foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//text()"))
         {
@@ -144,8 +135,6 @@ public class BookManager : MonoBehaviour
                 sb.AppendLine(trimmedText);
             }
         }
-
-        // Return the visible text
         return sb.ToString();
     }
 }
