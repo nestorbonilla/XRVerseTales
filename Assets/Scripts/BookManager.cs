@@ -5,10 +5,12 @@ using System.Text;
 using UnityEngine;
 using TMPro;
 using HtmlAgilityPack;
+using OVRSimpleJSON;
 using VersOne.Epub;
 
 public class BookManager : MonoBehaviour
 {
+    [SerializeField] public AIManager aIManager;
     public string epubFileName = "principito.epub"; // The name of the EPUB file
     private string epubFilePath; // The full path to the EPUB file
     private EpubBook book; // The EPUB book object
@@ -85,6 +87,10 @@ public class BookManager : MonoBehaviour
             Debug.Log("Rendering page " + pageNumber);
             string visibleText = GetVisibleText(pages[pageIndex]);
             Debug.Log(visibleText);
+            JSONObject requestData = new JSONObject();
+            requestData.Add("text", visibleText);
+            string name = epubFileName + "_" + pageNumber.ToString();
+            aIManager.PaintBackgroundImage(requestData, name);
 
             // Update the text in TextMeshPro
             textMeshPro.text = visibleText;

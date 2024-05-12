@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19836235, g: 0.10044055, b: 0.050299153, a: 1}
+  m_IndirectSpecularColor: {r: 0.20837422, g: 0.20837422, b: 0.20837422, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -582,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &230658371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a42400a2adea845a9364ab909ba17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIManager: {fileID: 1500608593}
   epubFileName: principito.epub
   textMeshPro: {fileID: 46845365}
 --- !u!4 &230658372
@@ -1400,8 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbc853fd162b3c4981ffa0c5ed6bb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageFileName: image-360-2.jpg
-  backgroundMaterial: {fileID: 2100000, guid: 2765a61746d4a4a4cbc9debd7eed21a9, type: 2}
+  _backgroundMaterial: {fileID: 2100000, guid: 2765a61746d4a4a4cbc9debd7eed21a9, type: 2}
 --- !u!1001 &1649175131
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class AIManager : MonoBehaviour
     private Dictionary<string, byte[]> _imageByPage = new Dictionary<string, byte[]>();
     
     
-    private string _serverUrl = "http://localhost:5000/";
+    private string _serverUrl = "http://127.0.0.1:5000/";
     private string _serverActionPrompt = "generate_image";
     private bool _isGeneratingImage = false;
 
@@ -41,7 +41,7 @@ public class AIManager : MonoBehaviour
         }
     }
 
-    private void PaintBackgroundImage(JSONObject requestData, string name)
+    public void PaintBackgroundImage(JSONObject requestData, string name)
     {
         if (_imageByPage.ContainsKey(name))
         {
@@ -64,7 +64,7 @@ public class AIManager : MonoBehaviour
     {
         _isGeneratingImage = true;
         string jsonData = requestData.ToString();
-        UnityWebRequest www = new UnityWebRequest(_serverUrl, "POST");
+        UnityWebRequest www = new UnityWebRequest(_serverUrl + _serverActionPrompt, "POST");
         www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonData));
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
@@ -72,6 +72,7 @@ public class AIManager : MonoBehaviour
 
         if (www.result == UnityWebRequest.Result.Success)
         {
+            Debug.Log("POST request successful: " + www.downloadHandler.text);
             byte[] imageData = www.downloadHandler.data;
             SetTexture(imageData);
             _imageByPage.Add(name, imageData);
