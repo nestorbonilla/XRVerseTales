@@ -108,7 +108,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   - serializedVersion: 3
     name: High Fidelity
-    pixelLightCount: 2
+    pixelLightCount: 1
     shadows: 2
     shadowResolution: 1
     shadowProjection: 1
@@ -128,7 +128,7 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
-    vSyncCount: 1
+    vSyncCount: 0
     realtimeGICPUUsage: 25
     lodBias: 2
     maximumLODLevel: 0
@@ -158,7 +158,7 @@ QualitySettings:
     excludedTargetPlatforms: []
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
-    Android: 1
+    Android: 2
     CloudRendering: 2
     GameCoreScarlett: 2
     GameCoreXboxOne: 2
