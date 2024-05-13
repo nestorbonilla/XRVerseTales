@@ -17,6 +17,8 @@ public class PositionBookShelf : MonoBehaviour
     [SerializeField] private PortalMaker2 _portalMaker2;
     private OVRCameraRig _cameraRig;
     private bool _positioningBookShelf = true;
+    [SerializeField] private Vector3 _bookShelfRotationOffset = new Vector3(0, 0, 0);
+    [SerializeField] private Vector3 _bookShelfPositionOffset = new Vector3(0, 0, 0);
 
     void Start()
     {
@@ -57,13 +59,13 @@ public class PositionBookShelf : MonoBehaviour
 
             if (canPlaceBookShelf)
             {
-                _bookShelf.transform.position = bestPose.Value.position;
-                _bookShelf.transform.rotation = bestPose.Value.rotation;
+                _bookShelf.transform.position = bestPose.Value.position + _bookShelfPositionOffset;
+                _bookShelf.transform.rotation = bestPose.Value.rotation * Quaternion.Euler(_bookShelfRotationOffset);
                 //If trigger button is pressed
                 if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     _positioningBookShelf = false;
-                    _xrCircle.showGizmo = false;
+                    // _xrCircle.showGizmo = false;
                     
                     _portalMaker2.StartWindowPlaceOperation();
                     if(_textObject) _textObject.GetComponent<TextMeshProUGUI>().text = "Press the right trigger button when " +

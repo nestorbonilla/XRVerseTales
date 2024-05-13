@@ -485,6 +485,8 @@ MonoBehaviour:
   prefabToPlace: {fileID: 7825036778891003051, guid: bf55b44ad2746d34b85b8b5dc6dd1299,
     type: 3}
   _textObject: {fileID: 894171410}
+  _xrCircle: {fileID: 1729386381}
+  _portalPositionOffset: {x: 0.05, y: 0, z: 0}
 --- !u!1001 &559837923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,6 +1557,16 @@ PrefabInstance:
       propertyPath: _ovrPassthroughLayer
       value: 
       objectReference: {fileID: 706796826}
+    - target: {fileID: 1492775123008380729, guid: 2f00f170c35a441448b3a5dfb02eda7f,
+        type: 3}
+      propertyPath: _bookShelfPositionOffset.z
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492775123008380729, guid: 2f00f170c35a441448b3a5dfb02eda7f,
+        type: 3}
+      propertyPath: _bookShelfRotationOffset.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 3136596497948585162, guid: 2f00f170c35a441448b3a5dfb02eda7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1794,6 +1806,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14c8b918217dc694d8e8eb188e4027b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1729386381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2802733906052992369, guid: 2f00f170c35a441448b3a5dfb02eda7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1561002812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a146c4dc351eadb42a2ff41c2cfb7a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1832224631
