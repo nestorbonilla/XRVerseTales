@@ -1,29 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Utilities.XR;
 
-public class PositionBookShelf : MonoBehaviour
+public class PortalMaker2 : MonoBehaviour
 {
-    [SerializeField] private GameObject _bookShelf;
-    [SerializeField] private XRGizmos_Circle _xrCircle;
+    public GameObject prefabToPlace;
+    private bool positioningWindow = false;
     [SerializeField] private GameObject _textObject;
+
+    private bool _isInitialized = false;
+
+    private int _wallLayerMask;
+
+    private AudioSource _audioSource;
+    private GameObject _spawned;
     private OVRCameraRig _cameraRig;
-    private bool _positioningBookShelf = true;
 
     void Start()
     {
         if (!_cameraRig) _cameraRig = FindObjectOfType<OVRCameraRig>();
-        if (!_xrCircle) _xrCircle = FindObjectOfType<XRGizmos_Circle>();
+        _audioSource = GetComponent<AudioSource>();
+        _spawned = Instantiate(prefabToPlace);
+        foreach (var rend in _spawned.GetComponentsInChildren<Renderer>())
+        {
+            rend.enabled = false;
+        }
     }
-
+    
+    public void StartWindowPlaceOperation()
+    {
+        positioningWindow = true;
+        foreach (var rend in _spawned.GetComponentsInChildren<Renderer>())
+        {
+            rend.enabled = true;
+        }
+    }
+    
     private void FixedUpdate()
     {
-        if(_positioningBookShelf) GetBestPoseFromRaycastDebugger();
+        if(positioningWindow) GetBestPoseFromRaycastDebugger();
     }
-
+    
     private void GetBestPoseFromRaycastDebugger()
     {
         Ray ray = GetRightControllerRay(out bool rightControllerAnchor_IsNull);
@@ -31,7 +50,7 @@ public class PositionBookShelf : MonoBehaviour
         
         MRUK.PositioningMethod positioningMethod = MRUK.PositioningMethod.DEFAULT;
         Pose? bestPose = GetBestPoseFromRaycast(ray, Mathf.Infinity, new LabelFilter(), 
-                out MRUKAnchor sceneAnchor, out Vector3 surfaceNormal, positioningMethod);
+            out MRUKAnchor sceneAnchor, out Vector3 surfaceNormal, positioningMethod);
 
         bool hitIsOnVerticalSurface = true;
         // If the normal of the raycast hit is parallel to Vector3.up,
@@ -39,26 +58,18 @@ public class PositionBookShelf : MonoBehaviour
         if(isParallel) hitIsOnVerticalSurface = false;
         
         
-        if (bestPose.HasValue && sceneAnchor && _bookShelf)
+        if (bestPose.HasValue && sceneAnchor && prefabToPlace)
         {
-            bool canPlaceBookShelf = MRUKAnchorCanHoldBookShelf(sceneAnchor);
-            if(!hitIsOnVerticalSurface) 
-                _xrCircle.PlaceOnHorizontalSurface(bestPose.Value.position, bestPose.Value.rotation, canPlaceBookShelf);
-            else
-            {
-                _xrCircle.PlaceOnVerticalSurface(bestPose.Value.position, bestPose.Value.rotation, canPlaceBookShelf);
-                // XRGizmos.DrawPointer(bestPose.Value.position, surfaceNormal, Color.magenta);
-            }
+            bool isValid = MRUKAnchorIsValid(sceneAnchor);
 
-            if (canPlaceBookShelf)
+            if (isValid)
             {
-                _bookShelf.transform.position = bestPose.Value.position;
-                _bookShelf.transform.rotation = bestPose.Value.rotation;
-                //If trigger button is pressed
-                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+                _spawned.transform.position = bestPose.Value.position;
+                _spawned.transform.rotation = bestPose.Value.rotation;
+                if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
-                    _positioningBookShelf = false;
-                    _xrCircle.showGizmo = false;
+                    positioningWindow = false;
+                    _audioSource.Play();
                     if(_textObject) _textObject.SetActive(false);
                 }
             }
@@ -79,10 +90,9 @@ public class PositionBookShelf : MonoBehaviour
         return new Ray(rayOrigin, rayDirection);
     }
 
-    private bool MRUKAnchorCanHoldBookShelf(MRUKAnchor mrukAnchor)
+    private bool MRUKAnchorIsValid(MRUKAnchor mrukAnchor)
     {
-        return  (mrukAnchor.name == "WALL_FACE" || mrukAnchor.name == "TABLE" || mrukAnchor.name == "STORAGE" || 
-                 mrukAnchor.name == "FLOOR" || mrukAnchor.name == "BED");
+        return  (mrukAnchor.name == "WALL_FACE");
         // return true;
     }
 
@@ -149,5 +159,6 @@ public class PositionBookShelf : MonoBehaviour
 
             return bestPose;
         }
+
 
 }

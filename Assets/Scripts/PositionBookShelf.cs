@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Meta.XR.MRUtilityKit;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utilities.XR;
@@ -10,6 +11,10 @@ public class PositionBookShelf : MonoBehaviour
     [SerializeField] private GameObject _bookShelf;
     [SerializeField] private XRGizmos_Circle _xrCircle;
     [SerializeField] private GameObject _textObject;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private OVRPassthroughLayer _ovrPassthroughLayer;
+    [SerializeField] private float _duration = 1.5f;   // Duration in seconds
+    [SerializeField] private PortalMaker2 _portalMaker2;
     private OVRCameraRig _cameraRig;
     private bool _positioningBookShelf = true;
 
@@ -55,14 +60,36 @@ public class PositionBookShelf : MonoBehaviour
                 _bookShelf.transform.position = bestPose.Value.position;
                 _bookShelf.transform.rotation = bestPose.Value.rotation;
                 //If trigger button is pressed
-                if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+                if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
                     _positioningBookShelf = false;
                     _xrCircle.showGizmo = false;
+                    
+                    _portalMaker2.StartWindowPlaceOperation();
+                    if(_textObject) _textObject.GetComponent<TextMeshProUGUI>().text = "Press the right trigger button when " +
+                        "satisfied with the Window position";
+
                     // if(_textObject) _textObject.SetActive(false);
+                    // StartCoroutine(ChangeCameraVisuals());
                 }
             }
         }
+    }
+    
+    IEnumerator ChangeCameraVisuals()
+    {
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < _duration)
+        {
+            float currentValue = Mathf.Lerp(1, 0, elapsedTime / _duration);
+            _ovrPassthroughLayer.textureOpacity = currentValue;
+            // Debug.Log("Current Value: " + currentValue);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _camera.clearFlags = CameraClearFlags.Skybox;
     }
     
     Ray GetRightControllerRay(out bool rightControllerAnchor_IsNull)
