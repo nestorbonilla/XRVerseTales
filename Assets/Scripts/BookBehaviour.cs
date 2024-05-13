@@ -3,45 +3,27 @@ using UnityEngine;
 
 public class BookBehaviour : MonoBehaviour
 {
-    private const string OpenTrigger = "OpenTrigger";
-    private const string CloseTrigger = "CloseTrigger";
-
-    [SerializeField] private GameObject defaultPdfReader;
-    [SerializeField] private GameObject[] pdfReaders;
+    [SerializeField] private GameObject pdfReader;
     [SerializeField] private Animator bookAnimator;
     [SerializeField] private float rotationSpeed = 1f;
-    [SerializeField] private Transform cameraRig;
+    [SerializeField] private Transform centerEyeAnchor;
+    
+    private static readonly int OpenTrigger = Animator.StringToHash("OpenTrigger");
+    private static readonly int CloseTrigger = Animator.StringToHash("CloseTrigger");
 
-    private bool isBookOpen = false;
     public void OpenBook()
     {
-        isBookOpen = true;
-        SetBookRotation();
-        TriggerBookAnimation(OpenTrigger);
+        bookAnimator.SetTrigger(OpenTrigger);
+        StartCoroutine(LerpRotation(Quaternion.Euler(180, 180, 270)));
         StartCoroutine(DelayedActivation(1.2f));
     }
 
     public void CloseBook()
     {
-        isBookOpen = false;
-        foreach (GameObject pdfReader in pdfReaders)
-        {
-            pdfReader.SetActive(false);
-        }
-        TriggerBookAnimation(CloseTrigger);
+        pdfReader.SetActive(false);
+        bookAnimator.SetTrigger(CloseTrigger);
     }
     
-    private void SetBookRotation()
-    {
-        float cameraYRotation = cameraRig.rotation.eulerAngles.y;
-        StartCoroutine(LerpRotation(Quaternion.Euler(180, cameraYRotation - 90, 270))); // Modify this line
-    }
-
-    private void TriggerBookAnimation(string trigger)
-    {
-        bookAnimator.SetTrigger(trigger);
-    }
-
     IEnumerator LerpRotation(Quaternion targetRotation)
     {
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
@@ -55,6 +37,6 @@ public class BookBehaviour : MonoBehaviour
     IEnumerator DelayedActivation(float delay)
     {
         yield return new WaitForSeconds(delay);
-        defaultPdfReader.SetActive(true);
+        pdfReader.SetActive(true);
     }
 }

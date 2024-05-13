@@ -4112,12 +4112,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e763de29b1f8b047a25cdb6c4197157, type: 3}
---- !u!4 &384741499 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5790457220134241126, guid: 8e763de29b1f8b047a25cdb6c4197157,
-    type: 3}
-  m_PrefabInstance: {fileID: 384741498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388432859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6084,12 +6078,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8e763de29b1f8b047a25cdb6c4197157, type: 3}
---- !u!4 &583371709 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5790457220134241126, guid: 8e763de29b1f8b047a25cdb6c4197157,
-    type: 3}
-  m_PrefabInstance: {fileID: 583371708}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584771114
 GameObject:
   m_ObjectHideFlags: 0
@@ -6477,11 +6465,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5263260439105608587, guid: 965f8cef380b9884aacd88f19b479634,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1630362741}
+      addedObject: {fileID: 118323293}
     - targetCorrespondingSourceObject: {fileID: 5263260439105608587, guid: 965f8cef380b9884aacd88f19b479634,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 118323293}
+      addedObject: {fileID: 0}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 965f8cef380b9884aacd88f19b479634, type: 3}
 --- !u!1 &612001322 stripped
@@ -7030,7 +7018,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6263462338622402050, guid: fd2c56242668a6745b1976533ac2421b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 384741499}
+      addedObject: {fileID: 0}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd2c56242668a6745b1976533ac2421b, type: 3}
 --- !u!1 &687909909 stripped
@@ -17258,12 +17246,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1005949600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2799484147959018067, guid: f54012181eacade4ea242c65f804720f,
@@ -17329,12 +17317,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1013860388
 GameObject:
   m_ObjectHideFlags: 0
@@ -21527,7 +21515,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7965301801595126784, guid: ac040764b4d53d948951e825f2618f50,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 583371709}
+      addedObject: {fileID: 0}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1059794538485580595, guid: ac040764b4d53d948951e825f2618f50,
         type: 3}
@@ -23654,12 +23642,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e763de29b1f8b047a25cdb6c4197157, type: 3}
---- !u!4 &1630362741 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5790457220134241126, guid: 8e763de29b1f8b047a25cdb6c4197157,
-    type: 3}
-  m_PrefabInstance: {fileID: 1630362740}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1638573859 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2483171112401766338, guid: f54012181eacade4ea242c65f804720f,
@@ -23850,12 +23832,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1665855803
 GameObject:
   m_ObjectHideFlags: 0
