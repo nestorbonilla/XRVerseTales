@@ -596,6 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aIManager: {fileID: 1500608593}
+  _pageNumber: 1
   textMeshPro: {fileID: 46845365}
 --- !u!4 &230658372
 Transform:
@@ -751,6 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312460183}
+  - component: {fileID: 312460184}
   m_Layer: 0
   m_Name: Book
   m_TagString: Untagged
@@ -775,6 +777,22 @@ Transform:
   - {fileID: 46845367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &312460184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312460182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245e5f57fb863e64caff567895ee6f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bookTransform: {fileID: 312460183}
+  minimumY: 0
+  maximumY: 10
+  duration: 5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
