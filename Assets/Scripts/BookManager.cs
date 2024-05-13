@@ -17,14 +17,14 @@ public class BookManager : MonoBehaviour
     private EpubBook _book;
     private List<string> _chapters;
     private List<string> _pages;
-    private int _charactersPerPage = 333;
+    private int _charactersPerPage = 1000;
     private int _currentPageIndex = 0;
     private StringBuilder _sb;
     private bool _introductionFound = false;
     private int _introductionIndex = -1;
     public int _pageNumber = 1;
 
-    public TextMeshPro textMeshPro;
+    public TextMeshProUGUI textMeshPro;
     
     void Start()
     {
