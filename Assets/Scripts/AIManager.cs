@@ -9,8 +9,9 @@ using UnityEngine.Networking;
 
 public class AIManager : MonoBehaviour
 {
-    const int _imageWidth = 1024;
-    const int _imageHeight = 512;
+    private const int factor = 2;
+    const int _imageWidth = 1024 * factor;
+    const int _imageHeight = 512 * factor;
     private readonly HttpClient _httpClient = new HttpClient();
     
     private string _defaultImageFileName = "image-360-2.jpg";
@@ -24,6 +25,11 @@ public class AIManager : MonoBehaviour
     private bool _isGeneratingImage = false;
 
     void Start()
+    {
+        
+    }
+
+    private void PaintDefaultImage()
     {
         _imageFilePath = Path.Combine(Application.dataPath, "Textures", _defaultImageFileName);
 
