@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.darktable.xrgizmos": "https://github.com/darktable/XRGizmos.git",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.meta.xr.sdk.all": "64.0.0",
     "com.meta.xr.sdk.core": "64.0.0",
@@ -14,6 +15,7 @@
     "com.unity.timeline": "1.7.6",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.4",
+    "com.unity.xr.core-utils": "2.3.0",
     "com.unity.xr.oculus": "4.2.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
