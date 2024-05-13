@@ -810,7 +810,13 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
+<<<<<<< Updated upstream
   scriptingDefineSymbols: {}
+=======
+  scriptingDefineSymbols:
+    Android: XR_GIZMOS
+    Standalone: XR_GIZMOS
+>>>>>>> Stashed changes
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
