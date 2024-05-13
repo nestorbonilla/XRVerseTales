@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a146c4dc351eadb42a2ff41c2cfb7a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 0.25
-  thickness: 0.01
+  _circleRadius: 0.25
+  _circleThickness: 0.0073
+  _pointerSize: 0.5
+  _pointerThickness: 0.0044
   _color_CannotPlace: {r: 1, g: 0, b: 0, a: 1}
   _color_CanPlace: {r: 0, g: 1, b: 0, a: 1}
-  _verticalSurfacePositionOffset: {x: -0.1, y: 0, z: 0}
   _horizonatalSurfacePositionOffset: {x: 0, y: -0.02, z: 0}
   _verticalSurfaceRotationOffset: {x: 90, y: 0, z: 0}
   showGizmo: 1

@@ -99,7 +99,7 @@ MonoBehaviour:
   - WallU: 5
     WallV: 2
     AnchorUV: 1
-  Labels: 32767
+  Labels: 16383
 --- !u!1 &8234598543131838223
 GameObject:
   m_ObjectHideFlags: 0

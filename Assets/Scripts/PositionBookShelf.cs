@@ -9,7 +9,7 @@ public class PositionBookShelf : MonoBehaviour
 {
     [SerializeField] private GameObject _bookShelf;
     [SerializeField] private XRGizmos_Circle _xrCircle;
-    [SerializeField] private GameObject _textRenderer;
+    [SerializeField] private GameObject _textObject;
     private OVRCameraRig _cameraRig;
     private bool _positioningBookShelf = true;
 
@@ -45,7 +45,10 @@ public class PositionBookShelf : MonoBehaviour
             if(!hitIsOnVerticalSurface) 
                 _xrCircle.PlaceOnHorizontalSurface(bestPose.Value.position, bestPose.Value.rotation, canPlaceBookShelf);
             else
+            {
                 _xrCircle.PlaceOnVerticalSurface(bestPose.Value.position, bestPose.Value.rotation, canPlaceBookShelf);
+                // XRGizmos.DrawPointer(bestPose.Value.position, surfaceNormal, Color.magenta);
+            }
 
             if (canPlaceBookShelf)
             {
@@ -56,7 +59,7 @@ public class PositionBookShelf : MonoBehaviour
                 {
                     _positioningBookShelf = false;
                     _xrCircle.showGizmo = false;
-                    _textRenderer.SetActive(false);
+                    if(_textObject) _textObject.SetActive(false);
                 }
             }
         }
@@ -79,7 +82,7 @@ public class PositionBookShelf : MonoBehaviour
     private bool MRUKAnchorCanHoldBookShelf(MRUKAnchor mrukAnchor)
     {
         return  (mrukAnchor.name == "WALL_FACE" || mrukAnchor.name == "TABLE" || mrukAnchor.name == "STORAGE" || 
-                 mrukAnchor.name == "FLOOR" || mrukAnchor.name == "BED" || mrukAnchor.name == "GLOBAL_MESH");
+                 mrukAnchor.name == "FLOOR" || mrukAnchor.name == "BED");
         // return true;
     }
 
