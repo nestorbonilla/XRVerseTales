@@ -68,7 +68,7 @@ public class PositionBookShelf : MonoBehaviour
                     // _xrCircle.showGizmo = false;
                     
                     _portalMaker2.StartWindowPlaceOperation();
-                    if(_textObject) _textObject.GetComponent<TextMeshProUGUI>().text = "Press the right trigger button when " +
+                    if(_textObject) _textObject.GetComponent<TextMeshProUGUI>().text = "Press the left trigger button when " +
                         "satisfied with the Window position";
 
                     // if(_textObject) _textObject.SetActive(false);

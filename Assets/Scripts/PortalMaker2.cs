@@ -78,7 +78,7 @@ public class PortalMaker2 : MonoBehaviour
             {
                 _spawned.transform.position = bestPose.Value.position + _portalPositionOffset;
                 _spawned.transform.rotation = bestPose.Value.rotation;
-                if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
+                if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
                 {
                     positioningWindow = false;
                     _audioSource.Play();
@@ -89,17 +89,17 @@ public class PortalMaker2 : MonoBehaviour
         }
     }
     
-    Ray GetRightControllerRay(out bool rightControllerAnchor_IsNull)
+    Ray GetRightControllerRay(out bool leftControllerAnchor_IsNull)
     {
-        rightControllerAnchor_IsNull = false;
-        if (!_cameraRig.rightControllerAnchor)
+        leftControllerAnchor_IsNull = false;
+        if (!_cameraRig.leftControllerAnchor)
         {
-            rightControllerAnchor_IsNull = true;
+            leftControllerAnchor_IsNull = true;
             return new Ray();
         }
         
-        Vector3 rayOrigin = _cameraRig.rightControllerAnchor.position;
-        Vector3 rayDirection = _cameraRig.rightControllerAnchor.forward;
+        Vector3 rayOrigin = _cameraRig.leftControllerAnchor.position;
+        Vector3 rayDirection = _cameraRig.leftControllerAnchor.forward;
         return new Ray(rayOrigin, rayDirection);
     }
 

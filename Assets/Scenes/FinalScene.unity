@@ -486,7 +486,7 @@ MonoBehaviour:
     type: 3}
   _textObject: {fileID: 894171410}
   _xrCircle: {fileID: 1729386381}
-  _portalPositionOffset: {x: 0.05, y: 0, z: 0}
+  _portalPositionOffset: {x: 0.09, y: 0, z: 0}
 --- !u!1001 &559837923
 PrefabInstance:
   m_ObjectHideFlags: 0
