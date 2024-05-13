@@ -7,6 +7,7 @@ public class BookBehaviour : MonoBehaviour
     private const string CloseTrigger = "CloseTrigger";
 
     [SerializeField] private GameObject defaultPdfReader;
+    [SerializeField] private GameObject _scrollReader;
     [SerializeField] private GameObject[] pdfReaders;
     [SerializeField] private Animator bookAnimator;
     [SerializeField] private float rotationSpeed = 1f;
@@ -55,6 +56,7 @@ public class BookBehaviour : MonoBehaviour
     IEnumerator DelayedActivation(float delay)
     {
         yield return new WaitForSeconds(delay);
-        defaultPdfReader.SetActive(true);
+        _scrollReader.SetActive(true);
+        // defaultPdfReader.SetActive(true);
     }
 }
