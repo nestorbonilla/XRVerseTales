@@ -22,6 +22,7 @@ public class BookManager : MonoBehaviour
     private StringBuilder _sb;
     private bool _introductionFound = false;
     private int _introductionIndex = -1;
+    public int _pageNumber = 1;
 
     public TextMeshPro textMeshPro;
     
@@ -138,7 +139,25 @@ public class BookManager : MonoBehaviour
         return innerText.Trim();
     }
 
-    public void RenderPage(int pageNumber)
+    public void NextPage()
+    {
+        if (_pageNumber < _pages.Count)
+        {
+            _pageNumber++;
+            RenderPage(_pageNumber);
+        }
+    }
+    
+    public void PreviousPage()
+    {
+        if (_pageNumber > 1)
+        {
+            _pageNumber--;
+            RenderPage(_pageNumber);
+        }
+    }
+    
+    private void RenderPage(int pageNumber)
     {
         int pageIndex = pageNumber - 1;
         if (pageIndex >= 0 && pageIndex < _pages.Count)

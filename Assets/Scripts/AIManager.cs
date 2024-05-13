@@ -9,8 +9,8 @@ using UnityEngine.Networking;
 
 public class AIManager : MonoBehaviour
 {
-    const int _imageWidth = 2048;
-    const int _imageHeight = 1024;
+    const int _imageWidth = 1024;
+    const int _imageHeight = 512;
     private readonly HttpClient _httpClient = new HttpClient();
     
     private string _defaultImageFileName = "image-360-2.jpg";
