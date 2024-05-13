@@ -2076,6 +2076,11 @@ PrefabInstance:
       propertyPath: _hand
       value: 
       objectReference: {fileID: 771404107}
+    - target: {fileID: 1584980199939673226, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1681450548049057272, guid: fff919dadfcd73745ba2de6f1918eb3d,
         type: 3}
       propertyPath: _hand
@@ -2086,6 +2091,11 @@ PrefabInstance:
       propertyPath: _hand
       value: 
       objectReference: {fileID: 921075011}
+    - target: {fileID: 2024929770337889403, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2831016246332225964, guid: fff919dadfcd73745ba2de6f1918eb3d,
         type: 3}
       propertyPath: _target
@@ -2116,6 +2126,26 @@ PrefabInstance:
       propertyPath: _jointDeltaProvider
       value: 
       objectReference: {fileID: 921075019}
+    - target: {fileID: 4329684896903122140, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770935543993013785, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017977128218114291, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017977128218114300, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5172743628435923851, guid: fff919dadfcd73745ba2de6f1918eb3d,
         type: 3}
       propertyPath: _hand
@@ -2140,6 +2170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Required
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786249319291620455, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7487990965110127657, guid: fff919dadfcd73745ba2de6f1918eb3d,
         type: 3}
@@ -2221,6 +2256,11 @@ PrefabInstance:
       propertyPath: _fingerFeatureStateProvider
       value: 
       objectReference: {fileID: 921075015}
+    - target: {fileID: 8610388248804897414, guid: fff919dadfcd73745ba2de6f1918eb3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
