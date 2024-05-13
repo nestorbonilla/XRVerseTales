@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.darktable.xrgizmos": "https://github.com/darktable/XRGizmos.git",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
     "com.meta.xr.sdk.core": "64.0.0",
     "com.unity.collab-proxy": "2.3.1",

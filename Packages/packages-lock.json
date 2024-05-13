@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.darktable.xrgizmos": {
+      "version": "https://github.com/darktable/XRGizmos.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "558f23b6ed48f7aabca66e190dac1a6bcb37bce8"
+    },
     "com.github-glitchenzo.nugetforunity": {
       "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
       "depth": 0,
