@@ -17,12 +17,15 @@ public class PortalMaker2 : MonoBehaviour
     private AudioSource _audioSource;
     private GameObject _spawned;
     private OVRCameraRig _cameraRig;
+    [SerializeField] private XRGizmos_Circle _xrCircle;
+    [SerializeField] private Vector3 _portalPositionOffset = new Vector3(0, 0, 0);
 
     void Start()
     {
         if (!_cameraRig) _cameraRig = FindObjectOfType<OVRCameraRig>();
         _audioSource = GetComponent<AudioSource>();
         _spawned = Instantiate(prefabToPlace);
+        if (!_xrCircle) _xrCircle = FindObjectOfType<XRGizmos_Circle>();
         foreach (var rend in _spawned.GetComponentsInChildren<Renderer>())
         {
             rend.enabled = false;
@@ -36,6 +39,8 @@ public class PortalMaker2 : MonoBehaviour
         {
             rend.enabled = true;
         }
+
+        _xrCircle.showGizmo = true;
     }
     
     private void FixedUpdate()
@@ -61,10 +66,17 @@ public class PortalMaker2 : MonoBehaviour
         if (bestPose.HasValue && sceneAnchor && prefabToPlace)
         {
             bool isValid = MRUKAnchorIsValid(sceneAnchor);
+            if(!hitIsOnVerticalSurface) 
+                _xrCircle.PlaceOnHorizontalSurface(bestPose.Value.position, bestPose.Value.rotation, hitIsOnVerticalSurface);
+            else
+            {
+                _xrCircle.PlaceOnVerticalSurface(bestPose.Value.position, bestPose.Value.rotation, hitIsOnVerticalSurface);
+                // XRGizmos.DrawPointer(bestPose.Value.position, surfaceNormal, Color.magenta);
+            }
 
             if (isValid)
             {
-                _spawned.transform.position = bestPose.Value.position;
+                _spawned.transform.position = bestPose.Value.position + _portalPositionOffset;
                 _spawned.transform.rotation = bestPose.Value.rotation;
                 if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
                 {
