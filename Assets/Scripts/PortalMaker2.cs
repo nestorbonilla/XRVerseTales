@@ -83,6 +83,7 @@ public class PortalMaker2 : MonoBehaviour
                     positioningWindow = false;
                     _audioSource.Play();
                     if(_textObject) _textObject.SetActive(false);
+                    _xrCircle.showGizmo = false;
                 }
             }
         }
