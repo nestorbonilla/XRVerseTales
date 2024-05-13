@@ -59,7 +59,7 @@ public class PositionBookShelf : MonoBehaviour
                 {
                     _positioningBookShelf = false;
                     _xrCircle.showGizmo = false;
-                    if(_textObject) _textObject.SetActive(false);
+                    // if(_textObject) _textObject.SetActive(false);
                 }
             }
         }
