@@ -79,7 +79,7 @@ public class AIManager : MonoBehaviour
         else
         {
             // Muestra el error en caso de que ocurra uno
-            Debug.LogError("Error in POST request: " + www.error);
+            Debug.Log("Error in POST request: " + www.error);
         }
         _isGeneratingImage = false;
     }

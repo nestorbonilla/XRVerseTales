@@ -163,7 +163,7 @@ public class BookManager : MonoBehaviour
         if (pageIndex >= 0 && pageIndex < _pages.Count)
         {
             textMeshPro.text = _pages[pageIndex];
-            RenderAI(_pages[pageIndex], pageIndex);
+            RenderAI(_pages[pageIndex], pageIndex); 
         }
         else
         {
